@@ -1,6 +1,7 @@
 from users.models import User
 from django.core.management import BaseCommand
 from typing import Any, Optional
+import os
 
 
 class Command(BaseCommand):
@@ -10,10 +11,10 @@ class Command(BaseCommand):
         self.stdout.write(self.style.WARNING("Criando usuário administrador..."))
 
         admin_data = {
-            "username": "admin",
-            "email": "admin@mail.com",
-            "password": "admin1234",
-            "first_name": "Administrador",
+            "username": os.getenv("ADMIN_USERNAME"),
+            "email": os.getenv("ADMIN_EMAIL"),
+            "password": os.getenv("ADMIN_PASSWORD"),
+            "first_name": os.getenv("ADMIN_FIRST_NAME"),
         }
 
         find_adm = User.objects.filter(is_superuser=True)

@@ -36,7 +36,7 @@ ALLOWED_HOSTS = []
 
 THIRTY_PARTY_APPS = ["rest_framework"]
 
-MY_APPS = ["users"]
+MY_APPS = ["users", "lists", "finances", "categories"]
 
 DJANGO_APPS = [
     "django.contrib.admin",
