@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Projeto para controlar suas finanças de forma fácil e intuitiva"
 authors = ["Gabriel Machado <gbrasil200@gmail.com>"]
 readme = "README.md"
-packages = [{include = "shibudo finances _ api"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
