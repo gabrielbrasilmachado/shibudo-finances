@@ -15,6 +15,7 @@ class Command(BaseCommand):
             "email": os.getenv("ADMIN_EMAIL"),
             "password": os.getenv("ADMIN_PASSWORD"),
             "first_name": os.getenv("ADMIN_FIRST_NAME"),
+            "image": os.getenv("ADMIN_IMAGE"),
         }
 
         find_adm = User.objects.filter(is_superuser=True)

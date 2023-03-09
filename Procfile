@@ -1,0 +1,1 @@
+web: python manage.py collectstatic --no-input && python manage.py migrate && python manage.py createadmin && gunicorn -b 0.0.0.0:$PORT _shibudo_finances.wsgi --log-level debug

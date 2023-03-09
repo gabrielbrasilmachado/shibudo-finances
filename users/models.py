@@ -9,6 +9,7 @@ class User(AbstractUser):
     last_name = None
     email = models.EmailField(unique=True)
     is_superuser = models.BooleanField(default=False, editable=False)
+    image = models.ImageField()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
