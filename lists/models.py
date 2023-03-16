@@ -24,7 +24,7 @@ class List(models.Model):
     name = models.CharField(max_length=127)
     month = models.CharField(max_length=20, choices=MonthChoices.choices)
     year = models.PositiveIntegerField(
-        validators=[MaxValueValidator(2200), MinValueValidator(1900)]
+        validators=[MaxValueValidator(2030), MinValueValidator(2023)]
     )
 
     user = models.ForeignKey("users.User", models.CASCADE, "lists")

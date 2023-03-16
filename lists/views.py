@@ -4,6 +4,8 @@ from .serializers import ListSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsListOwnerOrAdmin
+from rest_framework.exceptions import APIException
+from rest_framework.views import status
 
 
 class ListView(ListCreateAPIView):
@@ -12,12 +14,17 @@ class ListView(ListCreateAPIView):
     serializer_class = ListSerializer
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return List.objects.all()
-
         return List.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
+        listFound = List.objects.filter(
+            user=self.request.user,
+            year=self.request.data["year"],
+            month=self.request.data["month"],
+        )
+        if listFound:
+            raise ListDuplicationError()
+
         serializer.save(user=self.request.user)
 
 
@@ -28,3 +35,8 @@ class ListDetailView(RetrieveUpdateDestroyAPIView):
     queryset = List.objects.all()
 
     lookup_url_kwarg = "list_id"
+
+
+class ListDuplicationError(APIException):
+    status_code = status.HTTP_409_CONFLICT
+    default_detail = "List with this month and year already exists"

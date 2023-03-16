@@ -42,6 +42,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://*.127.0.0.1'",
 ]
 
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+
 # RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 # if RENDER_EXTERNAL_HOSTNAME:
 #     ALLOWED_HOSTS += [RENDER_EXTERNAL_HOSTNAME, "0.0.0.0"]
@@ -52,7 +54,7 @@ if RAILWAY_STATIC_URL:
 
 # Application definition
 
-THIRTY_PARTY_APPS = ["rest_framework", "drf_spectacular"]
+THIRTY_PARTY_APPS = ["rest_framework", "drf_spectacular", "corsheaders"]
 
 MY_APPS = ["users", "lists", "finances", "categories"]
 
@@ -68,6 +70,7 @@ DJANGO_APPS = [
 INSTALLED_APPS = THIRTY_PARTY_APPS + MY_APPS + DJANGO_APPS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -192,6 +195,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=24),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=6),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
 }
